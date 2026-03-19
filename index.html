@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechUp! — Level Up Your Tech & Biz Vocab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- START SCREEN -->
+    <div id="start-screen" class="screen active">
+      <div class="logo">
+        <span class="logo-icon">&#9889;</span>
+        <h1>TechUp!</h1>
+        <p class="tagline">Level up your tech & business vocabulary</p>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-value" id="total-xp">0</span>
+          <span class="stat-label">Total XP</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="current-streak">0</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="cards-mastered">0</span>
+          <span class="stat-label">Mastered</span>
+        </div>
+      </div>
+
+      <h2 class="section-title">Choose a Category</h2>
+      <div id="category-grid" class="category-grid"></div>
+
+      <h2 class="section-title">Quiz Mode</h2>
+      <div class="mode-selector">
+        <button class="mode-btn active" data-mode="multiple-choice">
+          <span class="mode-icon">&#9744;</span>
+          Multiple Choice
+        </button>
+        <button class="mode-btn" data-mode="flashcard">
+          <span class="mode-icon">&#128196;</span>
+          Flashcards
+        </button>
+        <button class="mode-btn" data-mode="type-answer">
+          <span class="mode-icon">&#9000;</span>
+          Type It
+        </button>
+      </div>
+
+      <button id="start-btn" class="primary-btn" disabled>Start Quiz</button>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen" class="screen">
+      <div class="quiz-header">
+        <button id="quit-btn" class="icon-btn" title="Quit">&#10005;</button>
+        <div class="progress-container">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div class="quiz-stats">
+          <span id="quiz-xp" class="xp-badge">0 XP</span>
+          <span id="quiz-counter">1 / 10</span>
+        </div>
+      </div>
+
+      <div id="quiz-area" class="quiz-area">
+        <!-- Dynamically filled -->
+      </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="results-screen" class="screen">
+      <div class="results-card">
+        <h2 id="results-title">Quiz Complete!</h2>
+        <div class="results-circle">
+          <span id="results-score">0</span>
+          <span class="results-label">/ 10</span>
+        </div>
+        <div id="results-xp" class="results-xp">+0 XP</div>
+        <div id="results-streak" class="results-streak"></div>
+        <div id="results-badges" class="results-badges"></div>
+
+        <div class="results-breakdown" id="results-breakdown"></div>
+
+        <div class="results-actions">
+          <button id="retry-btn" class="primary-btn">Play Again</button>
+          <button id="home-btn" class="secondary-btn">Home</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
