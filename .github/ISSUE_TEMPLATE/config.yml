@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "💡 Challenge Me — suggest a new question"
+    url: https://github.com/sepic222/tech-quiz-app/issues/new?template=stump-me.yml
+    about: Think you know a term that should be in the quiz? Add it here.
