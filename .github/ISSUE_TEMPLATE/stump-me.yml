@@ -1,12 +1,12 @@
-name: "🧠 Stump Me Challenge"
-description: "Think you know a term I don't? Dare me to learn it."
-title: "[STUMP] "
+name: "🧠 Challenge Me"
+description: "Think you know a term I don't? Add it to the quiz!"
+title: "[CHALLENGE] "
 labels: ["new-question"]
 body:
   - type: markdown
     attributes:
       value: |
-        ## Think you can stump me? 😏
+        ## Think you can challenge me? 😏
         Fill this out and I'll add it to the quiz. If I get it wrong the first time I play it — you win bragging rights forever.
         > **Rules:** one term per issue, real definitions only, no made-up buzzwords (looking at you, blockchain people).
 
@@ -91,5 +91,5 @@ body:
           required: true
         - label: "I checked it's not already in the quiz"
           required: true
-        - label: "I'm ready to be smug if this stumps the quiz owner"
+        - label: "I'm ready to be smug if this challenges the quiz owner successfully"
           required: false
