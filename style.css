@@ -818,6 +818,92 @@ body {
   gap: 10px;
 }
 
+/* ===== VOICE MODE ===== */
+.voice-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 0;
+}
+
+.voice-read-btn {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.voice-read-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.voice-mic-btn {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 3px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: inherit;
+}
+
+.voice-mic-btn:hover:not(:disabled) {
+  border-color: var(--green);
+  box-shadow: 0 0 30px rgba(0,255,136,0.2);
+}
+
+.voice-mic-btn .mic-icon { font-size: 2.6rem; }
+
+.voice-mic-btn .mic-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.voice-mic-btn.recording {
+  border-color: var(--pink);
+  animation: micPulse 1.2s ease-in-out infinite;
+}
+
+.voice-mic-btn.recording .mic-label { color: var(--pink); }
+
+.voice-mic-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.voice-transcript {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-style: italic;
+  text-align: center;
+  min-height: 22px;
+  font-weight: 500;
+}
+
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,45,120,0.5); }
+  50%       { box-shadow: 0 0 0 18px rgba(255,45,120,0); }
+}
+
 /* ===== SESSION HISTORY ===== */
 .session-history {
   margin-bottom: 28px;
