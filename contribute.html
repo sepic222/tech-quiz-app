@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechUp! — Challenge Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="sticker-field" aria-hidden="true">
+    <span class="sticker" style="--x:4%;--y:5%;--s:2;--rot:-14deg;--dur:6s;--delay:0s;--glow:rgba(155,93,229,0.5)">🧙</span>
+    <span class="sticker" style="--x:84%;--y:6%;--s:1.8;--rot:18deg;--dur:5.5s;--delay:1.2s;--glow:rgba(255,230,0,0.4)">⚡</span>
+    <span class="sticker" style="--x:88%;--y:50%;--s:1.6;--rot:-8deg;--dur:7s;--delay:0.6s;--glow:rgba(0,200,255,0.35)">💡</span>
+    <span class="sticker" style="--x:2%;--y:60%;--s:1.5;--rot:10deg;--dur:6.5s;--delay:2s;--glow:rgba(0,255,136,0.3)">🧠</span>
+    <span class="sticker" style="--x:78%;--y:80%;--s:1.9;--rot:-18deg;--dur:5.2s;--delay:0.4s;--glow:rgba(255,45,120,0.35)">🔥</span>
+  </div>
+
+  <div id="app" class="contribute-app">
+
+    <div class="contribute-topnav">
+      <a href="index.html" class="back-home-link">← Home</a>
+    </div>
+
+    <div class="contribute-hero">
+      <span class="contribute-hero-icon">🧙</span>
+      <h1 class="contribute-title">Yoda Mode</h1>
+      <p class="contribute-sub">Think you know a term I don't? Drop it here — I'll add it to the quiz. If I get it wrong when I play it, bragging rights are yours. Forever.</p>
+    </div>
+
+    <form class="contribute-form" id="contribute-form" novalidate>
+
+      <div class="form-group">
+        <label class="form-label" for="f-category">Category <span class="form-required">*</span></label>
+        <select class="form-select" id="f-category" required>
+          <option value="" disabled selected>Pick a category…</option>
+          <option value="tech-vocab — Tech Vocabulary">Tech Vocabulary</option>
+          <option value="ai-native — AI &amp; LLMs">AI &amp; LLMs</option>
+          <option value="saas-metrics — SaaS Metrics">SaaS Metrics</option>
+          <option value="sales-methods — Sales Methods">Sales Methods</option>
+          <option value="product-mgmt — Product Management">Product Management</option>
+          <option value="biz-dev — Biz Dev &amp; GTM">Biz Dev &amp; GTM</option>
+          <option value="terminal-basics — Terminal Basics">Terminal Basics</option>
+          <option value="NEW — suggest a new category (explain below)">Suggest a new category…</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-term">Term / Abbreviation <span class="form-required">*</span></label>
+          <input class="form-input" id="f-term" type="text" placeholder="e.g. YAGNI" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-full">Full Name <span class="form-required">*</span></label>
+          <input class="form-input" id="f-full" type="text" placeholder="e.g. You Aren't Gonna Need It" required autocomplete="off">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="f-definition">
+          Definition <span class="form-required">*</span>
+          <span class="form-hint-inline">— no jargon, no spoilers (don't include the term itself!)</span>
+        </label>
+        <div class="voice-input-row">
+          <textarea class="form-textarea" id="f-definition" placeholder="Explain it like the person has never heard it. Avoid using the term or abbreviation in your explanation." required rows="4"></textarea>
+          <button type="button" class="form-mic-btn" id="mic-definition" title="Dictate definition">🎤</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="f-example">
+          Real-world example <span class="form-required">*</span>
+          <span class="form-hint-inline">— you CAN use the term here</span>
+        </label>
+        <div class="voice-input-row">
+          <textarea class="form-textarea" id="f-example" placeholder='"Should we add multi-currency support now?" "Nobody asked — YAGNI. Ship the MVP first."' required rows="3"></textarea>
+          <button type="button" class="form-mic-btn" id="mic-example" title="Dictate example">🎤</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-difficulty">Difficulty <span class="form-required">*</span></label>
+          <select class="form-select" id="f-difficulty" required>
+            <option value="" disabled selected>How niche is this?</option>
+            <option value="1 — Everyone should know this">1 — Everyone should know this</option>
+            <option value="2 — You've been around a bit">2 — You've been around a bit</option>
+            <option value="3 — Okay you're just showing off">3 — Okay you're just showing off</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-ai-tip">AI Tool Tip <span class="form-optional">(optional)</span></label>
+          <input class="form-input" id="f-ai-tip" type="text" placeholder="e.g. Ask Claude to flag violations in your backlog" autocomplete="off">
+        </div>
+      </div>
+
+      <div id="form-error" class="form-error" style="display:none"></div>
+
+      <button type="submit" class="submit-github-btn" id="submit-btn">
+        Open on GitHub →
+      </button>
+      <p class="submit-note">Opens GitHub with your term pre-filled — review and submit from there. No account needed if Sara approves it.</p>
+
+    </form>
+
+  </div>
+
+  <script>
+    // ===== VOICE INPUT =====
+    function attachMic(micBtnId, textareaId) {
+      var btn = document.getElementById(micBtnId);
+      var ta  = document.getElementById(textareaId);
+      var SR  = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) { btn.disabled = true; btn.title = 'Voice not supported in this browser'; return; }
+
+      btn.addEventListener('click', function () {
+        if (btn.classList.contains('recording')) return;
+        window.speechSynthesis && window.speechSynthesis.cancel();
+
+        var rec = new SR();
+        rec.continuous = false;
+        rec.interimResults = false;
+        rec.lang = 'en-US';
+
+        btn.classList.add('recording');
+        btn.textContent = '⏹';
+
+        rec.onresult = function (e) {
+          var t = e.results[0][0].transcript.trim();
+          ta.value = ta.value ? ta.value + ' ' + t : t;
+          btn.classList.remove('recording');
+          btn.textContent = '🎤';
+        };
+        rec.onerror = rec.onend = function () {
+          btn.classList.remove('recording');
+          btn.textContent = '🎤';
+        };
+        rec.start();
+      });
+    }
+
+    attachMic('mic-definition', 'f-definition');
+    attachMic('mic-example',    'f-example');
+
+    // ===== FORM SUBMIT =====
+    document.getElementById('contribute-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var category   = document.getElementById('f-category').value;
+      var term       = document.getElementById('f-term').value.trim();
+      var full       = document.getElementById('f-full').value.trim();
+      var definition = document.getElementById('f-definition').value.trim();
+      var example    = document.getElementById('f-example').value.trim();
+      var difficulty = document.getElementById('f-difficulty').value;
+      var aiTip      = document.getElementById('f-ai-tip').value.trim();
+      var errorEl    = document.getElementById('form-error');
+
+      if (!category || !term || !full || !definition || !example || !difficulty) {
+        errorEl.textContent = 'Please fill in all required fields before opening GitHub.';
+        errorEl.style.display = 'block';
+        errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      errorEl.style.display = 'none';
+
+      var title = '[CHALLENGE] ' + term;
+
+      var body = [
+        '## \uD83E\uDDE0 Challenge Submission',
+        '',
+        '**Category:** ' + category,
+        '**Term / Abbreviation:** ' + term,
+        '**Full Name:** ' + full,
+        '',
+        '**Definition:**',
+        definition,
+        '',
+        '**Real-world example:**',
+        example,
+        '',
+        '**Difficulty:** ' + difficulty,
+        aiTip ? ('**AI Tool Tip:** ' + aiTip) : '',
+        '',
+        '---',
+        '_Submitted via TechUp! Yoda Mode_',
+      ].filter(function (l) { return l !== undefined; }).join('\n');
+
+      var url = 'https://github.com/sepic222/tech-quiz-app/issues/new'
+        + '?title='  + encodeURIComponent(title)
+        + '&body='   + encodeURIComponent(body)
+        + '&labels=' + encodeURIComponent('new-question');
+
+      window.open(url, '_blank', 'noopener');
+    });
+  </script>
+
+</body>
+</html>
