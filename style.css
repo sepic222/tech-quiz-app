@@ -722,6 +722,57 @@ body {
   gap: 10px;
 }
 
+/* ===== SESSION HISTORY ===== */
+.session-history { margin-bottom: 30px; }
+
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.session-row {
+  display: grid;
+  grid-template-columns: 72px 48px 1fr 48px 54px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.session-date, .session-mode {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.session-cats {
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.session-score {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.session-xp {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+@media (max-width: 500px) {
+  .session-row { grid-template-columns: 65px 40px 1fr 46px; }
+  .session-xp { display: none; }
+}
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
