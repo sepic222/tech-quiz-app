@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechUp! — Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- START SCREEN -->
+    <div id="start-screen" class="screen active">
+
+      <!-- Floating sticker decorations -->
+      <div class="sticker-field" aria-hidden="true">
+        <span class="sticker" style="--x:3%;--y:6%;--s:2.4;--rot:-18deg;--dur:6s;--delay:0s;--glow:rgba(0,255,136,0.5)">💎</span>
+        <span class="sticker" style="--x:82%;--y:4%;--s:2;--rot:22deg;--dur:5.5s;--delay:1.2s;--glow:rgba(255,230,0,0.5)">⚡</span>
+        <span class="sticker" style="--x:70%;--y:10%;--s:1.7;--rot:-10deg;--dur:7s;--delay:0.4s;--glow:rgba(155,93,229,0.5)">🦋</span>
+        <span class="sticker" style="--x:1%;--y:42%;--s:1.5;--rot:14deg;--dur:5s;--delay:2s;--glow:rgba(0,200,255,0.4)">💻</span>
+        <span class="sticker" style="--x:88%;--y:38%;--s:2.1;--rot:-7deg;--dur:6.5s;--delay:0.7s;--glow:rgba(0,200,255,0.5)">✨</span>
+        <span class="sticker" style="--x:6%;--y:76%;--s:1.8;--rot:9deg;--dur:4.5s;--delay:1.5s;--glow:rgba(0,255,136,0.4)">⭐</span>
+        <span class="sticker" style="--x:80%;--y:72%;--s:2.3;--rot:-20deg;--dur:6s;--delay:0.2s;--glow:rgba(255,107,0,0.5)">🏆</span>
+        <span class="sticker" style="--x:44%;--y:2%;--s:1.4;--rot:6deg;--dur:7.5s;--delay:2.8s;--glow:rgba(255,230,0,0.3)">💫</span>
+        <span class="sticker" style="--x:90%;--y:62%;--s:1.6;--rot:16deg;--dur:5.2s;--delay:1s;--glow:rgba(255,45,120,0.4)">🔥</span>
+        <span class="sticker" style="--x:50%;--y:90%;--s:1.9;--rot:-14deg;--dur:6.8s;--delay:0.6s;--glow:rgba(155,93,229,0.4)">🎮</span>
+      </div>
+
+      <div class="quiz-topnav">
+        <a href="index.html" class="back-home-link">← Home</a>
+      </div>
+
+      <div class="logo">
+        <span class="logo-icon">&#9889;</span>
+        <h1>TechUp!</h1>
+        <p class="tagline">Level up your tech &amp; business vocabulary</p>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-value" id="total-xp">0</span>
+          <span class="stat-label">Total XP</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="current-streak">0</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="cards-mastered">0</span>
+          <span class="stat-label">Mastered</span>
+        </div>
+      </div>
+
+      <div id="session-history"></div>
+
+      <h2 class="section-title">Choose a Category</h2>
+      <div id="category-grid" class="category-grid"></div>
+
+      <h2 class="section-title">Quiz Mode</h2>
+      <div class="mode-selector">
+        <button class="mode-btn active" data-mode="multiple-choice">
+          <span class="mode-icon">&#9744;</span>
+          Multiple Choice
+        </button>
+        <button class="mode-btn" data-mode="flashcard">
+          <span class="mode-icon">&#128196;</span>
+          Flashcards
+        </button>
+        <button class="mode-btn" data-mode="type-answer">
+          <span class="mode-icon">&#9000;</span>
+          Type It
+        </button>
+        <button class="mode-btn" data-mode="voice">
+          <span class="mode-icon">🎤</span>
+          Voice
+        </button>
+      </div>
+
+      <button id="start-btn" class="primary-btn" disabled>Start Quiz</button>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen" class="screen">
+      <div class="quiz-header">
+        <button id="quit-btn" class="icon-btn" title="Quit">&#10005;</button>
+        <div class="progress-container">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div class="quiz-stats">
+          <span id="quiz-xp" class="xp-badge">0 XP</span>
+          <span id="quiz-counter">1 / 10</span>
+        </div>
+      </div>
+
+      <div id="quiz-area" class="quiz-area">
+        <!-- Dynamically filled -->
+      </div>
+    </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="results-screen" class="screen">
+      <div class="results-card">
+        <h2 id="results-title">Quiz Complete!</h2>
+        <div class="results-circle">
+          <span id="results-score">0</span>
+          <span class="results-label">/ 10</span>
+        </div>
+        <div id="results-xp" class="results-xp">+0 XP</div>
+        <div id="results-streak" class="results-streak"></div>
+        <div id="results-badges" class="results-badges"></div>
+
+        <div class="results-breakdown" id="results-breakdown"></div>
+
+        <div class="results-actions">
+          <button id="retry-btn" class="primary-btn">Play Again</button>
+          <button id="home-btn" class="secondary-btn">Home</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
