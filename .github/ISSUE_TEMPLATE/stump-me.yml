@@ -1,0 +1,95 @@
+name: "🧠 Stump Me Challenge"
+description: "Think you know a term I don't? Dare me to learn it."
+title: "[STUMP] "
+labels: ["new-question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Think you can stump me? 😏
+        Fill this out and I'll add it to the quiz. If I get it wrong the first time I play it — you win bragging rights forever.
+        > **Rules:** one term per issue, real definitions only, no made-up buzzwords (looking at you, blockchain people).
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category"
+      description: "Where does this term live?"
+      options:
+        - "tech-vocab — Tech Vocabulary"
+        - "ai-native — AI & LLMs"
+        - "saas-metrics — SaaS Metrics"
+        - "sales-methods — Sales Methods"
+        - "product-mgmt — Product Management"
+        - "biz-dev — Biz Dev & GTM"
+        - "terminal-basics — Terminal Basics"
+        - "NEW — suggest a new category (explain below)"
+    validations:
+      required: true
+
+  - type: input
+    id: term
+    attributes:
+      label: "Term / Abbreviation"
+      description: "The short answer the quiz will ask for. e.g. API, Churn, git stash"
+      placeholder: "e.g. YAGNI"
+    validations:
+      required: true
+
+  - type: input
+    id: full
+    attributes:
+      label: "Full name"
+      description: "The expanded form, if different from the term. If it IS the full name, repeat it."
+      placeholder: "e.g. You Aren't Gonna Need It"
+    validations:
+      required: true
+
+  - type: textarea
+    id: definition
+    attributes:
+      label: "Definition"
+      description: "Explain it like the person has never heard it. No jargon. No spoilers — don't include the term/abbreviation itself in this text!"
+      placeholder: "A software design principle that says don't add functionality until you actually need it. Avoid building features 'just in case'."
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: "Real-world example"
+      description: "One or two sentences showing it in context. You CAN use the term here."
+      placeholder: "\"Should we add multi-currency support now?\" \"Nobody asked for it — YAGNI. Ship the MVP first.\""
+    validations:
+      required: true
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: "Difficulty"
+      description: "How niche is this?"
+      options:
+        - "1 — Everyone should know this"
+        - "2 — You've been around a bit"
+        - "3 — Okay you're just showing off"
+    validations:
+      required: true
+
+  - type: input
+    id: ai_tool
+    attributes:
+      label: "AI Tool Tip (optional)"
+      description: "Is there a clever way to use AI with this concept? Leave blank if not."
+      placeholder: "e.g. Ask Claude to review your backlog and flag anything that violates this principle."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Before you submit"
+      options:
+        - label: "The definition does NOT contain the term/abbreviation (that's cheating in reverse)"
+          required: true
+        - label: "I checked it's not already in the quiz"
+          required: true
+        - label: "I'm ready to be smug if this stumps the quiz owner"
+          required: false
