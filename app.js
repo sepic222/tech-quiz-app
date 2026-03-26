@@ -57,6 +57,51 @@ function updateStatsDisplay() {
   document.getElementById('current-streak').textContent = progress.streak;
   const masteredCount = Object.values(progress.mastered).filter(c => c >= 3).length;
   document.getElementById('cards-mastered').textContent = masteredCount;
+  renderHistory();
+}
+
+function renderHistory() {
+  const container = document.getElementById('session-history');
+  if (!container) return;
+
+  const sessions = loadProgress().sessions || [];
+  if (sessions.length === 0) { container.innerHTML = ''; return; }
+
+  const modeLabel = { 'multiple-choice': 'MC', 'flashcard': 'Flash', 'type-answer': 'Type' };
+
+  function formatDate(ts) {
+    const d = new Date(ts);
+    const today = new Date();
+    const yesterday = new Date(Date.now() - 86400000);
+    if (d.toDateString() === today.toDateString()) return 'Today';
+    if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  }
+
+  function scoreColor(score, total) {
+    const pct = score / total;
+    if (pct >= 0.8) return 'var(--green)';
+    if (pct >= 0.5) return 'var(--yellow)';
+    return 'var(--pink)';
+  }
+
+  const rows = [...sessions].reverse().slice(0, 8).map(s => {
+    const catNames = s.categories.map(c => QUESTIONS[c]?.name || c).join(', ');
+    const color = scoreColor(s.score, s.total);
+    return `
+      <div class="session-row">
+        <span class="session-date">${formatDate(s.ts)}</span>
+        <span class="session-mode">${modeLabel[s.mode] || s.mode}</span>
+        <span class="session-cats">${catNames}</span>
+        <span class="session-score" style="color:${color}">${s.score} / ${s.total}</span>
+        <span class="session-xp">+${s.xp} XP</span>
+      </div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <h2 class="section-title">Recent Sessions</h2>
+    <div class="session-list">${rows}</div>
+  `;
 }
 
 // ===== CATEGORIES =====
@@ -410,6 +455,17 @@ function showResults() {
     progress.categoryStats[catId].played++;
     if (a.correct) progress.categoryStats[catId].correct++;
   });
+
+  if (!progress.sessions) progress.sessions = [];
+  progress.sessions.push({
+    ts: Date.now(),
+    categories: [...STATE.selectedCategories],
+    mode: STATE.mode,
+    score: STATE.score,
+    total: STATE.currentQuestions.length,
+    xp: STATE.xpEarned
+  });
+  if (progress.sessions.length > 20) progress.sessions.shift();
 
   saveProgress(progress);
 
