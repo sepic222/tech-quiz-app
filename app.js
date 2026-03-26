@@ -67,7 +67,7 @@ function renderHistory() {
   const sessions = loadProgress().sessions || [];
   if (sessions.length === 0) { container.innerHTML = ''; return; }
 
-  const modeLabel = { 'multiple-choice': 'MC', 'flashcard': 'Flash', 'type-answer': 'Type' };
+  const modeLabel = { 'multiple-choice': 'MC', 'flashcard': 'Flash', 'type-answer': 'Type', 'voice': 'Voice' };
 
   function formatDate(ts) {
     const d = new Date(ts);
@@ -199,6 +199,9 @@ function renderQuestion() {
       break;
     case 'type-answer':
       renderTypeAnswer(area, q);
+      break;
+    case 'voice':
+      renderVoiceMode(area, q);
       break;
   }
 }
@@ -422,6 +425,7 @@ function showFeedback(q, isCorrect) {
 }
 
 function nextQuestion() {
+  window.speechSynthesis && window.speechSynthesis.cancel();
   STATE.currentIndex++;
   if (STATE.currentIndex >= STATE.currentQuestions.length) {
     showResults();
@@ -531,11 +535,101 @@ function setupResultButtons() {
 }
 
 function goHome() {
+  window.speechSynthesis && window.speechSynthesis.cancel();
   STATE.selectedCategories = [];
   showScreen('start-screen');
   renderCategories();
   updateStatsDisplay();
   document.getElementById('start-btn').disabled = true;
+}
+
+// ===== VOICE MODE =====
+function speakText(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = 0.88;
+  utter.pitch = 1;
+  window.speechSynthesis.speak(utter);
+}
+
+function renderVoiceMode(area, q) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const supported = !!SpeechRecognition;
+
+  area.innerHTML = `
+    <div class="question-card">
+      <div class="question-label">What is this?</div>
+      <div class="question-text">${q.definition}</div>
+    </div>
+    <div class="voice-area">
+      <button class="voice-read-btn" id="voice-read-btn">🔊 Read aloud</button>
+      <button class="voice-mic-btn" id="voice-mic-btn" ${!supported ? 'disabled' : ''}>
+        <span class="mic-icon">🎤</span>
+        <span class="mic-label">${supported ? 'Tap to answer' : 'Not supported in this browser'}</span>
+      </button>
+      <div class="voice-transcript" id="voice-transcript"></div>
+    </div>
+    <div id="feedback-area"></div>
+  `;
+
+  // Auto-read the question
+  speakText(q.definition);
+
+  document.getElementById('voice-read-btn').addEventListener('click', () => speakText(q.definition));
+
+  if (!supported) return;
+
+  const micBtn = document.getElementById('voice-mic-btn');
+
+  micBtn.addEventListener('click', () => {
+    if (micBtn.disabled) return;
+    window.speechSynthesis.cancel();
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    micBtn.classList.add('recording');
+    micBtn.querySelector('.mic-label').textContent = 'Listening\u2026';
+
+    recognition.onresult = (e) => {
+      const transcript = e.results[0][0].transcript.trim();
+      micBtn.classList.remove('recording');
+      micBtn.disabled = true;
+      document.getElementById('voice-transcript').textContent = `You said: "${transcript}"`;
+      handleVoiceAnswer(transcript, q, micBtn);
+    };
+
+    recognition.onerror = () => {
+      micBtn.classList.remove('recording');
+      micBtn.querySelector('.mic-label').textContent = 'Tap to answer';
+    };
+
+    recognition.onend = () => {
+      if (micBtn.classList.contains('recording')) {
+        micBtn.classList.remove('recording');
+        micBtn.querySelector('.mic-label').textContent = 'Tap to answer';
+      }
+    };
+
+    recognition.start();
+  });
+}
+
+function handleVoiceAnswer(transcript, q, micBtn) {
+  const isCorrect = checkTypeAnswer(transcript, q);
+
+  if (isCorrect) {
+    STATE.score++;
+    const xp = xpForDifficulty(q.difficulty);
+    STATE.xpEarned += xp;
+    showXPFloat(micBtn, xp);
+  }
+
+  STATE.answers.push({ question: q, correct: isCorrect, userAnswer: transcript });
+  showFeedback(q, isCorrect);
 }
 
 // ===== HELPERS =====
