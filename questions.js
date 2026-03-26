@@ -49,14 +49,14 @@ const QUESTIONS = {
       {
         term: "Headless",
         full: "Headless Architecture",
-        definition: "Software that runs without a graphical user interface (no 'head'). A headless browser runs web pages without displaying them. A headless CMS stores content but has no built-in frontend.",
+        definition: "Software that runs without a graphical user interface (no visible 'head'). Can execute web pages without displaying them, or store and manage content without any built-in frontend.",
         example: "Headless browsers are used for automated testing. Headless CMSs like Contentful let you push content to any frontend (web, app, kiosk).",
         difficulty: 2
       },
       {
         term: "Inference",
         full: "AI Inference",
-        definition: "The process of running a trained AI model to generate predictions or outputs. Training teaches the model; inference is when it actually does its job.",
+        definition: "The process of running a trained AI model to generate predictions or outputs. Training teaches the model; this step is when it actually does its job.",
         example: "When ChatGPT answers your question, that's inference. New AI chips (like NVIDIA's) are optimized to do inference faster and cheaper than general-purpose GPUs.",
         difficulty: 2
       },
@@ -91,7 +91,7 @@ const QUESTIONS = {
       {
         term: "Webhook",
         full: "Webhook",
-        definition: "An automated message sent from one app to another when an event happens. Unlike an API where you ask for data, a webhook pushes data to you.",
+        definition: "An automated message sent from one app to another when an event happens. Unlike an API where you ask for data, this mechanism pushes data to you automatically.",
         example: "When someone pays on Stripe, a webhook notifies your server instantly — no need to keep checking.",
         difficulty: 2
       },
@@ -112,14 +112,14 @@ const QUESTIONS = {
       {
         term: "Latency",
         full: "Latency",
-        definition: "The time delay between a request and a response. Low latency = fast. High latency = sluggish. Critical for user experience.",
+        definition: "The time delay between a request and a response. Low = fast. High = sluggish. Critical for user experience.",
         example: "A website with 3 seconds of latency will lose most visitors. CDNs help reduce latency by serving content from nearby servers.",
         difficulty: 2
       },
       {
         term: "Endpoint",
         full: "API Endpoint",
-        definition: "A specific URL where an API receives requests. Each endpoint handles a specific type of data or action.",
+        definition: "A specific URL where an API receives requests. Each one handles a specific type of data or action.",
         example: "GET /api/users is an endpoint that returns a list of users. POST /api/orders creates a new order.",
         difficulty: 2
       },
@@ -457,7 +457,7 @@ const QUESTIONS = {
       {
         term: "Backlog",
         full: "Product Backlog",
-        definition: "The prioritized list of all features, bugs, improvements, and tasks that could be worked on. The product manager owns the backlog and decides what's most important.",
+        definition: "The prioritized list of all features, bugs, improvements, and tasks that could be worked on. The product manager owns this list and decides what's most important.",
         example: "A healthy backlog has items ranked by impact. Top items are well-defined and ready to build; bottom items are rough ideas.",
         difficulty: 1
       },
@@ -513,7 +513,7 @@ const QUESTIONS = {
       {
         term: "KPI",
         full: "Key Performance Indicator",
-        definition: "A measurable value that shows how effectively you're achieving a key business objective. Not every metric is a KPI — only the ones that truly matter.",
+        definition: "A measurable value that shows how effectively you're achieving a key business objective. Not every metric qualifies — only the ones that truly matter.",
         example: "For a SaaS sales team: pipeline generated, win rate, and average deal size might be your KPIs. Page views is a metric, not a KPI.",
         difficulty: 1
       },
@@ -535,21 +535,21 @@ const QUESTIONS = {
       {
         term: "cd",
         full: "cd (change directory)",
-        definition: "Navigate between folders in the terminal. 'cd folder-name' goes into a folder. 'cd ..' goes up one level. 'cd ~' goes to your home directory.",
+        definition: "Navigate between directories in the terminal. Accepts a folder name to go into it, '..' to go up one level, or '~' to return to your home directory.",
         example: "cd Documents/projects — moves into the projects folder inside Documents.",
         difficulty: 1
       },
       {
         term: "ls",
         full: "ls (list)",
-        definition: "List files and folders in the current directory. 'ls -la' shows hidden files and details like permissions and file sizes.",
+        definition: "List all files and folders in the current directory. Adding '-la' shows hidden files with details like permissions and file sizes.",
         example: "Type 'ls' to see what's in the current folder. Use 'ls -la' to see everything including hidden config files.",
         difficulty: 1
       },
       {
         term: "mkdir",
         full: "mkdir (make directory)",
-        definition: "Create a new folder. 'mkdir my-project' creates a folder called my-project in your current location.",
+        definition: "Create a new folder in the current location. Accepts a folder name, and supports '-p' to create nested folders all at once.",
         example: "mkdir -p src/components — creates nested folders (src and components inside it) in one command.",
         difficulty: 1
       },
@@ -591,14 +591,14 @@ const QUESTIONS = {
       {
         term: "touch",
         full: "touch (create file)",
-        definition: "Create a new empty file. 'touch index.html' creates an empty HTML file in the current directory.",
+        definition: "Create one or more new empty files in the current directory. Accepts a filename like 'index.html', and you can specify multiple names at once.",
         example: "touch style.css app.js — creates two new files at once.",
         difficulty: 1
       },
       {
         term: "rm",
         full: "rm (remove)",
-        definition: "Delete files or folders. Use with caution — there's no trash can! 'rm file.txt' deletes a file. 'rm -r folder' deletes a folder and everything inside it.",
+        definition: "Delete files or folders from the command line. Use with caution — there's no trash can! The '-r' flag removes a folder and everything inside it.",
         example: "rm -r node_modules — deletes the (often huge) dependencies folder. Be very careful with rm -rf!",
         difficulty: 1
       },

@@ -276,7 +276,6 @@ function renderTypeAnswer(area, q) {
     <div class="question-card">
       <div class="question-label">Name this term</div>
       <div class="question-text">${q.definition}</div>
-      <div class="question-context">${q.example}</div>
     </div>
     <div class="type-input-area">
       <input type="text" class="type-input" id="type-input"
