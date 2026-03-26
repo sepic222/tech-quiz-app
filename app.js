@@ -80,9 +80,9 @@ function renderHistory() {
 
   function scoreColor(score, total) {
     const pct = score / total;
-    if (pct >= 0.8) return 'var(--success)';
-    if (pct >= 0.5) return 'var(--warning)';
-    return 'var(--danger)';
+    if (pct >= 0.8) return 'var(--green)';
+    if (pct >= 0.5) return 'var(--yellow)';
+    return 'var(--pink)';
   }
 
   const rows = [...sessions].reverse().slice(0, 8).map(s => {
