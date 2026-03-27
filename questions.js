@@ -425,6 +425,14 @@ const QUESTIONS = {
         difficulty: 2
       },
       {
+        term: "OTE",
+        full: "On-Target Earnings",
+        definition: "The total compensation a salesperson earns if they hit exactly 100% of their quota — combining base salary and commission. Used to set expectations for what reps can make.",
+        example: "A sales role with a €60k base and €60k commission at 100% quota has an OTE of €120k. If you blow past quota, you can exceed OTE.",
+        aiTool: "Use Claude to model different OTE structures (accelerators, tiered commissions) and calculate expected earnings under various quota attainment scenarios.",
+        difficulty: 1
+      },
+      {
         term: "Mutual Action Plan",
         full: "Mutual Action Plan / Close Plan",
         definition: "A shared document between seller and buyer that outlines the steps, owners, and timeline needed to evaluate and implement a solution. Creates accountability on both sides.",
